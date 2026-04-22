@@ -197,7 +197,7 @@ header.masthead {
   /* *background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url("../images/kgp1.jpg"); */
   /* *background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url("/img/acorn_street_small.jpg"); */
   /* *background:linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url("/img/acorn_street_small.jpg"); */
-  background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url("../images/iiitn.webp");
+  background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url("../images/iiitn.jpg");
   background-repeat: no-repeat;
   *background-attachment: scroll;
   background-attachment: fixed;
@@ -842,7 +842,7 @@ h6 {
   height: 100%;
   /* padding-top: 8rem; */
   /* padding-bottom: 8rem; */
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../images/iiitn.webp");
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../images/iiitn.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
