@@ -1,75 +1,61 @@
-$(function() {
+$(function () {
 
   $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
     preventSubmit: true,
-    submitError: function($form, event, errors) {
-      // additional error messages or events
+    submitError: function ($form, event, errors) {
+      // do nothing
     },
-    submitSuccess: function($form, event) {
-      event.preventDefault(); // prevent default submit behaviour
-      // get values from FORM
-      var name = $("input#name").val();
-      var email = $("input#email").val();
-      var phone = $("input#phone").val();
+    submitSuccess: function ($form, event) {
+      event.preventDefault();
+
+      var name    = $("input#name").val();
+      var email   = $("input#email").val();
+      var phone   = $("input#phone").val();
       var message = $("textarea#message").val();
-      var firstName = name; // For Success/Failure Message
-      // Check for white space in name for Success/Fail message
-      if (firstName.indexOf(' ') >= 0) {
-        firstName = name.split(' ').slice(0, -1).join(' ');
-      }
-      $this = $("#sendMessageButton");
-      $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
-      $.ajax({
-        url: "/mail",
-        type: "POST",
-        data: {
-          name: name,
-          phone: phone,
-          email: email,
-          message: message
-        },
-        cache: false,
-        success: function() {
-          // Success message
-          $('#success').html("<div class='alert alert-success'>");
-          $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            .append("</button>");
-          $('#success > .alert-success')
-            .append("<strong>Your message has been sent. </strong>");
-          $('#success > .alert-success')
-            .append('</div>');
-          //clear all fields
+      var firstName = name.indexOf(' ') >= 0 ? name.split(' ')[0] : name;
+
+      var $btn = $("#contactForm button[type='submit']");
+      $btn.prop("disabled", true);
+
+      fetch("https://formspree.io/f/mdayywrg", {   // <-- paste your ID here
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: JSON.stringify({ name: name, email: email, phone: phone, message: message })
+      })
+      .then(function (res) {
+        if (res.ok) {
+          $('#success').html(
+            "<div class='alert alert-success'>" +
+            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" +
+            "<strong>Your message has been sent.</strong></div>"
+          );
           $('#contactForm').trigger("reset");
-        },
-        error: function() {
-          // Fail message
-          $('#success').html("<div class='alert alert-danger'>");
-          $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            .append("</button>");
-          $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
-          $('#success > .alert-danger').append('</div>');
-          //clear all fields
-          $('#contactForm').trigger("reset");
-        },
-        complete: function() {
-          setTimeout(function() {
-            $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
-          }, 1000);
+        } else {
+          throw new Error("Server error");
         }
+      })
+      .catch(function () {
+        $('#success').html(
+          "<div class='alert alert-danger'>" +
+          "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" +
+          "<strong>Sorry " + firstName + ", something went wrong. Please try again later!</strong></div>"
+        );
+      })
+      .finally(function () {
+        setTimeout(function () { $btn.prop("disabled", false); }, 1000);
       });
     },
-    filter: function() {
+    filter: function () {
       return $(this).is(":visible");
-    },
+    }
   });
 
-  $("a[data-toggle=\"tab\"]").click(function(e) {
+  $("a[data-toggle='tab']").click(function (e) {
     e.preventDefault();
     $(this).tab("show");
   });
 });
 
-/*When clicking on Full hide fail/success boxes */
-$('#name').focus(function() {
+$('#name').focus(function () {
   $('#success').html('');
 });
