@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,6 +45,174 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <style>
+    /* ===== CERTIFICATES SECTION ===== */
+    #certificates {
+      background: #edeeef;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .cert-section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .cert-section-title h2 {
+      color: #222;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    .cert-section-title hr {
+      border-top: 3px solid #007bff;
+      width: 60px;
+      margin: 12px auto 0;
+    }
+
+    .cert-category-heading {
+      border-left: 4px solid #007bff;
+      padding-left: 12px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .cert-category-heading.green {
+      border-left-color: #28a745;
+    }
+
+    /* ── Scroll Track ── */
+    .cert-scroll-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #007bff #dde1e5;
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-scroll-track::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .cert-scroll-track::-webkit-scrollbar-track {
+      background: #dde1e5;
+      border-radius: 10px;
+    }
+
+    .cert-scroll-track::-webkit-scrollbar-thumb {
+      background: #007bff;
+      border-radius: 10px;
+    }
+
+    /* ── Individual Card ── */
+    .cert-card {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      display: block;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    /* ── Image area ── */
+    .cert-card-img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      background: #c8cdd3; /* shown when no src / broken img */
+    }
+
+    /* Placeholder shimmer for empty slots */
+    .cert-card-img-placeholder {
+      width: 100%;
+      height: 190px;
+      background: linear-gradient(90deg, #d0d4d9 25%, #e2e5e8 50%, #d0d4d9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9aa0a8;
+      font-size: 2rem;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── Card body ── */
+    .cert-card-body {
+      padding: 13px 15px 15px;
+    }
+
+    .cert-card-body h5 {
+      margin: 0 0 3px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #222;
+      font-family: 'Montserrat', sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cert-card-body .cert-meta {
+      font-size: 0.76rem;
+      color: #888;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cert-badge {
+      display: inline-block;
+      margin-top: 7px;
+      font-size: 0.7rem;
+      background: #e8f0fe;
+      color: #1a73e8;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-weight: 600;
+    }
+
+    .cert-badge.green {
+      background: #e6f4ea;
+      color: #1e7e34;
+    }
+
+    /* ── Scroll hint arrow ── */
+    .cert-scroll-hint {
+      text-align: right;
+      font-size: 0.75rem;
+      color: #999;
+      margin-bottom: 1.8rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .cert-scroll-hint i {
+      margin-left: 4px;
+    }
+  </style>
+
 </head>
 
 <body id="page-top">
@@ -75,9 +243,11 @@
             <a class="nav-link js-scroll-trigger" href="#timeline">Experience</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#certificates">Certificates</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
           </li>
-          <!-- ✅ RESUME LINK — paste your Google Drive / PDF link in href below -->
           <li class="nav-item">
             <a class="nav-link" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="blank"><b><i class="fa fa-file-pdf-o"></i> Resume</b></a>
           </li>
@@ -151,7 +321,6 @@
           <a class="btn btn-light btn-xl ml-2 mr-2 mb-3 js-scroll-trigger about-btn" href="#skills">Skills</a>
           <a class="btn btn-light btn-xl ml-2 mr-2 mb-3 js-scroll-trigger about-btn" href="#projects">Projects</a>
           <a class="btn btn-light btn-xl ml-2 mr-2 mb-3 js-scroll-trigger about-btn" href="#timeline">Experience</a>
-          <!-- ✅ RESUME LINK — paste your Google Drive / PDF link in href below -->
           <a class="btn btn-dark btn-xl ml-2 mr-2 mb-3 about-btn" href="https://drive.google.com/file/d/10VMW2KaI_rF5itO4Kv1pIgeaSvft6I1G/view?usp=sharing" target="blank">
             <i class="fa fa-file-pdf-o"></i> Resume</a>
         </div>
@@ -219,7 +388,6 @@
           <h4><b>Computer Vision</b></h4>
         </div>
 
-        <!-- NLP — upload images/nlp.png -->
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5 mb-3">
           <span class="service-icon rounded-circle mx-auto mb-3 text-secondary">
             <img src="./images/nlp.jpg" style="width: 70px; padding-bottom: 20px;" />
@@ -234,7 +402,6 @@
           <h4><b>NumPy / Pandas</b></h4>
         </div>
 
-        <!-- Matplotlib — upload images/matplotlib.png -->
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5 mb-3">
           <span class="service-icon rounded-circle mx-auto mb-3 text-secondary">
             <img src="./images/matplotlib.png" style="width: 70px; padding-bottom: 20px;" />
@@ -242,7 +409,6 @@
           <h4><b>Matplotlib / Seaborn</b></h4>
         </div>
 
-        <!-- Power BI — upload images/powerbi.png -->
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5 mb-3">
           <span class="service-icon rounded-circle mx-auto mb-3 text-secondary">
             <img src="./images/powerbi.jpg" style="width: 70px; padding-bottom: 20px;" />
@@ -250,7 +416,6 @@
           <h4><b>Power BI</b></h4>
         </div>
 
-        <!-- Tableau — upload images/tableau.png -->
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5 mb-3">
           <span class="service-icon rounded-circle mx-auto mb-3 text-secondary">
             <img src="./images/tableau.png" style="width: 70px; padding-bottom: 20px;" />
@@ -272,7 +437,6 @@
           <h4><b>Web Scraping</b></h4>
         </div>
 
-        <!-- YOLOv8 — upload images/yolov8.png -->
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5 mb-0">
           <span class="service-icon rounded-circle mx-auto mb-3 text-secondary">
             <img src="./images/yolov8.png" style="width: 70px; padding-bottom: 20px;" />
@@ -310,7 +474,6 @@
       <div class="portfolio-container">
         <div class="row">
 
-          <!-- Project 1: Traffic Conflict -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-cv">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
@@ -340,7 +503,6 @@
             </div>
           </div>
 
-          <!-- Project 2: 6G Anomaly Detection -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-ml">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
@@ -353,7 +515,7 @@
                 <div class="back">
                   <div class="inner">
                     <div class="portfolio-links">
-                      <a href="https://github.com/anuragnayak01" title="Github">
+                      <a href="https://github.com/anuragnayak01/Hybrid-Deep-Logical-Explainable-Model-for-6G-Network-Slice-Anomaly-Detection" target="blank" title="Github">
                         <i class="fa fa-github"></i>
                       </a>
                     </div>
@@ -370,7 +532,6 @@
             </div>
           </div>
 
-          <!-- Project 3: GetFit Pose -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-cv">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
@@ -383,7 +544,7 @@
                 <div class="back">
                   <div class="inner">
                     <div class="portfolio-links">
-                      <a href="https://github.com/anuragnayak01" title="Github">
+                      <a href="https://github.com/anuragnayak01/GetFit_YogaPoseClassifier" target="blank" title="Github">
                         <i class="fa fa-github"></i>
                       </a>
                     </div>
@@ -399,7 +560,6 @@
             </div>
           </div>
 
-          <!-- Project 4: Image Similarity -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-cv">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
@@ -428,7 +588,6 @@
             </div>
           </div>
 
-          <!-- Project 5: Renewable Resource -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-data">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
@@ -457,7 +616,6 @@
             </div>
           </div>
 
-          <!-- Project 6: Truck Delivery -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-se">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
@@ -470,7 +628,7 @@
                 <div class="back">
                   <div class="inner">
                     <div class="portfolio-links">
-                      <a href="https://github.com/anuragnayak01" title="Github">
+                      <a href="https://github.com/anuragnayak01/Truck_delivery_route_optimization" target="blank" title="Github">
                         <i class="fa fa-github"></i>
                       </a>
                     </div>
@@ -478,6 +636,66 @@
                       <ul class="mb-0">
                         <li>Designed an efficient algorithm to maximize truck delivery profit by optimizing shortest-path computations.</li>
                         <li>Improved route selection performance using optimized implementations of Dijkstra's and Bellman–Ford algorithms.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: EDA Amazon Dataset -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-data">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background-image: url(./images/projects/amazon_eda.jpg); background-size:cover; background-position:center;">
+                  <div class="inner">
+                    <p>Exploratory Data Analysis — Amazon Dataset</p>
+                    <span>Python | Pandas | NumPy | Matplotlib | Seaborn</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/EDA_Amazon_dataset" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Performed comprehensive EDA on Amazon product dataset using Pandas and NumPy for data cleaning and transformation.</li>
+                        <li>Generated insightful visualizations with Matplotlib and Seaborn to uncover pricing trends, rating distributions, and category-level patterns.</li>
+                        <li>Answered key analytical questions on product performance, discount impact, and customer review behavior.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: Driver Drowsiness Detection System -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-cv">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background-image: url(./images/projects/drowsiness.jpg); background-size:cover; background-position:center;">
+                  <div class="inner">
+                    <p>Driver Drowsiness Detection System</p>
+                    <span>OpenCV | Dlib | MediaPipe | Streamlit | Python</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/driver-drowsiness-detection-system-anuragnayak" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Real-time driver alertness monitoring via Eye Aspect Ratio (EAR) using OpenCV and Dlib/MediaPipe facial landmark detection.</li>
+                        <li>Triggers audio alarm on drowsiness detection; includes lane detection module for enhanced road safety.</li>
+                        <li>Deployed as a Streamlit web app with Progressive Web App (PWA) support for installable, offline-capable usage.</li>
                       </ul>
                     </div>
                   </div>
@@ -506,7 +724,6 @@
         <div class="col-lg-12">
           <ul class="timeline">
 
-            <!-- IIIT Nagpur — upload images/iitn.png -->
             <li class="timeline-inverted" style="margin-bottom:32px">
               <a href="https://iiitn.ac.in/" target="blank">
                 <div class="timeline-image">
@@ -526,7 +743,6 @@
               </div>
             </li>
 
-            <!-- ML Projects — upload images/ml-research.png -->
             <li>
               <a href="https://github.com/anuragnayak01" target="blank">
                 <div class="timeline-image">
@@ -549,6 +765,197 @@
       </div>
     </div>
   </section>
+
+
+  <!-- ==================== CERTIFICATES SECTION ==================== -->
+  <section id="certificates">
+    <div class="container">
+
+      <div class="cert-section-title">
+        <h2>Certificates</h2>
+        <hr>
+      </div>
+
+      <!-- ── HACKATHON PARTICIPATION ── -->
+      <h4 class="cert-category-heading">🏆 Hackathon Participation</h4>
+      <p class="cert-scroll-hint">Scroll to explore &nbsp;<i class="fa fa-arrow-right"></i></p>
+
+      <div class="cert-scroll-track">
+
+       
+
+        <!-- HACKATHON CARD 1 — fill in your details -->
+        <a class="cert-card" href="Hackathon_Participation_Certificates/02f9b89f-a314-42d9-ac29-84f8a5cbb836.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/02f9b89f-a314-42d9-ac29-84f8a5cbb836.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+
+        <!-- HACKATHON CARD 2 -->
+        <a class="cert-card" href="Hackathon_Participation_Certificates/14ba6915-abf6-495d-815f-86258bb7725f.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/14ba6915-abf6-495d-815f-86258bb7725f.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+
+        <!-- HACKATHON CARD 3 -->
+        <a class="cert-card" href="Hackathon_Participation_Certificates/1ce6eddf-e213-4524-b897-c471cf4bf933.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/1ce6eddf-e213-4524-b897-c471cf4bf933.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+
+        <!-- HACKATHON CARD 4 -->
+        <a class="cert-card" href="Hackathon_Participation_Certificates/1e5d74c2-2318-46b7-b1fe-1b9d07f4fe30.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/1e5d74c2-2318-46b7-b1fe-1b9d07f4fe30.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+
+        <!-- HACKATHON CARD 5 -->
+        <a class="cert-card" href="Hackathon_Participation_Certificates/2025H2S06BAH25-P05639.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/2025H2S06BAH25-P05639.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+          <a class="cert-card" href="Hackathon_Participation_Certificates/2e2deaea-62c9-4f71-a370-15c0c398e56b.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/2e2deaea-62c9-4f71-a370-15c0c398e56b.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+         <a class="cert-card" href="Hackathon_Participation_Certificates/46021bc0-1a2a-44b9-ac56-4dbf566895e6.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/46021bc0-1a2a-44b9-ac56-4dbf566895e6.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+         <a class="cert-card" href="Hackathon_Participation_Certificates/5c0c7f05-c717-4dd8-ad2e-7fec66971870.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/5c0c7f05-c717-4dd8-ad2e-7fec66971870.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+         <a class="cert-card" href="Hackathon_Participation_Certificates/b57ba937-7c13-4414-a91e-f84c2904b6fb.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/b57ba937-7c13-4414-a91e-f84c2904b6fb.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+         <a class="cert-card" href="Hackathon_Participation_Certificates/d926ff1d-9d7c-41ad-ad38-0599da888c90.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/d926ff1d-9d7c-41ad-ad38-0599da888c90.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+         <a class="cert-card" href="Hackathon_Participation_Certificates/e2eebb07-d759-4f1f-9d13-15cc6861e147.pdf" target="_blank">
+          <img class="cert-card-img" src="Hackathon_Participation_Certificates/e2eebb07-d759-4f1f-9d13-15cc6861e147.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-trophy"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge">Hackathon</span>
+          </div>
+        </a>
+        <!-- ➕ Add more hackathon cards by copying any block above -->
+
+      </div><!-- end hackathon scroll track -->
+
+
+      <!-- ── OTHER CERTIFICATES ── -->
+      <h4 class="cert-category-heading green" style="margin-top: 2.5rem;">📜 Certificates</h4>
+      <p class="cert-scroll-hint">Scroll to explore &nbsp;<i class="fa fa-arrow-right"></i></p>
+
+      <div class="cert-scroll-track">
+
+        <!--
+          ╔══════════════════════════════════════════════════════════════╗
+          ║  HOW TO ADD A CERTIFICATE                                   ║
+          ║  Same steps as hackathon cards above.                       ║
+          ║  Change badge class from "cert-badge" to "cert-badge green" ║
+          ╚══════════════════════════════════════════════════════════════╝
+        -->
+
+        <!-- CERT CARD 1 -->
+        <a class="cert-card" href="Certificates/Certificate.pdf" target="_blank">
+          <img class="cert-card-img" src="Certificates/Certificate.pdf" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-certificate"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge green">Certificate</span>
+          </div>
+        </a>
+
+        <!-- CERT CARD 2 -->
+        <a class="cert-card" href="Certificates/Nvidia_certificate01.pdf.jpg" target="_blank">
+          <img class="cert-card-img" src="Certificates/Nvidia_certificate01.pdf.jpg" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cert-card-img-placeholder" style="display:none;"><i class="fa fa-certificate"></i></div>
+          <div class="cert-card-body">
+            <h5>&nbsp;</h5>
+            <span class="cert-meta">&nbsp;</span><br>
+            <span class="cert-badge green">Certificate</span>
+          </div>
+        </a>
+
+        
+
+        <!-- ➕ Add more certificate cards by copying any block above -->
+
+      </div><!-- end certificates scroll track -->
+
+    </div>
+  </section>
+  <!-- ==================== END CERTIFICATES ==================== -->
+
 
   <!-- Contact Section -->
   <section class="content-section text-white" id="contact" style="padding-top: 6rem; padding-bottom: 6rem">
