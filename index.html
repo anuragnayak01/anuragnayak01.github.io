@@ -257,28 +257,135 @@
   </nav>
 
   <!-- Header -->
-  <header class="masthead d-flex" style="background:#050816 !important; background-image:none !important; position:relative; overflow:hidden; padding-bottom:0; min-height:100vh;">
-    <!-- ★ Animated star background -->
+  <style>
+    .hero-gradient-text {
+      background: linear-gradient(135deg, #915eff 0%, #f272c8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-btn-primary {
+      display: inline-block;
+      padding: .7rem 2rem;
+      background: linear-gradient(135deg, #915eff, #f272c8);
+      color: #fff !important;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: 1.2px;
+      text-decoration: none !important;
+      transition: opacity .25s, transform .25s;
+      text-transform: uppercase;
+    }
+    .hero-btn-primary:hover { opacity:.85; transform:translateY(-2px); }
+    .hero-btn-outline {
+      display: inline-block;
+      padding: .7rem 2rem;
+      border: 2px solid #915eff;
+      color: #915eff !important;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: 1.2px;
+      text-decoration: none !important;
+      transition: background .25s, color .25s, transform .25s;
+      text-transform: uppercase;
+    }
+    .hero-btn-outline:hover {
+      background: #915eff;
+      color: #fff !important;
+      transform: translateY(-2px);
+    }
+    .hero-social-link {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none !important;
+      font-size: 1.1rem;
+      transition: transform .25s, background .25s, color .25s;
+    }
+    .hero-social-link:hover { transform: translateY(-3px); }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .cursor { display:inline-block; animation: blink 1s step-end infinite; margin-left:2px; color:#f272c8; }
+    @media (max-width:768px) {
+      .hero-left { text-align:center !important; padding:5rem 1.5rem 2rem !important; }
+      .hero-right { height:55vh !important; }
+      .hero-socials { justify-content:center !important; }
+      .hero-ctas { justify-content:center !important; }
+    }
+  </style>
+
+  <header class="masthead" style="background:#050816 !important; background-image:none !important; position:relative; overflow:hidden; padding:0; min-height:100vh;">
+    <!-- ★ Stars canvas -->
     <canvas id="stars-hero" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 
-    <!-- Two-column layout: photo + text on left | 3D avatar on right -->
-    <div style="position:relative;z-index:1;width:100%;display:flex;align-items:center;flex-wrap:wrap;min-height:100vh;">
+    <!-- subtle purple glow accents -->
+    <div style="position:absolute;top:-10%;left:-5%;width:420px;height:420px;background:radial-gradient(circle,rgba(145,94,255,.18) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;bottom:-5%;right:5%;width:320px;height:320px;background:radial-gradient(circle,rgba(242,114,200,.13) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
 
-      <!-- LEFT: your existing content (unchanged) -->
-      <div class="text-center my-auto" style="flex:1;min-width:280px;padding:3rem 1.5rem;">
-        <div class="profile_pic" style="padding-bottom:32px">
-          <img src="./images/me.jpg" class="img-responsive img-circle"
-            style="border:8px solid white; width:240px; height:240px;" alt="Anurag Nayak">
+    <!-- two-column flex -->
+    <div style="position:relative;z-index:1;width:100%;min-height:100vh;display:flex;align-items:center;flex-wrap:wrap;">
+
+      <!-- ── LEFT: text content ── -->
+      <div class="hero-left" style="flex:1;min-width:300px;padding:6rem 4% 4rem 7%;">
+
+        <!-- greeting tag -->
+        <p style="color:#aaa;font-size:.85rem;letter-spacing:3.5px;text-transform:uppercase;margin-bottom:.6rem;">
+          Hello, World! &nbsp;👋
+        </p>
+
+        <!-- name -->
+        <h1 class="hero-gradient-text" style="font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;line-height:1.05;margin-bottom:.8rem;">
+          Anurag Nayak
+        </h1>
+
+        <!-- accent bar -->
+        <div style="width:64px;height:4px;background:linear-gradient(90deg,#915eff,#f272c8);border-radius:2px;margin-bottom:1.1rem;"></div>
+
+        <!-- college -->
+        <p style="color:rgba(255,255,255,.75);font-size:.95rem;letter-spacing:.4px;margin-bottom:.5rem;">
+          B.Tech CSE &nbsp;·&nbsp; Data Science &amp; Analytics &nbsp;·&nbsp; IIIT Nagpur
+        </p>
+
+        <!-- typewriter -->
+        <p style="color:#f272c8;font-size:1.05rem;font-weight:500;min-height:1.7em;margin-bottom:1.8rem;">
+          <span id="hero-typewriter"></span><span class="cursor">|</span>
+        </p>
+
+        <!-- social icons -->
+        <div class="hero-socials" style="display:flex;gap:.75rem;margin-bottom:2rem;">
+          <a class="hero-social-link" href="https://github.com/anuragnayak01" target="_blank"
+             style="border:2px solid #915eff;color:#915eff;"
+             onmouseover="this.style.background='#915eff';this.style.color='#fff';"
+             onmouseout="this.style.background='transparent';this.style.color='#915eff';">
+            <i class="fa fa-github"></i>
+          </a>
+          <a class="hero-social-link" href="https://linkedin.com/in/anurag-nayak" target="_blank"
+             style="border:2px solid #f272c8;color:#f272c8;"
+             onmouseover="this.style.background='#f272c8';this.style.color='#fff';"
+             onmouseout="this.style.background='transparent';this.style.color='#f272c8';">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a class="hero-social-link" href="mailto:nayakanurag2004@gmail.com"
+             style="border:2px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);"
+             onmouseover="this.style.borderColor='#fff';this.style.color='#fff';"
+             onmouseout="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)';">
+            <i class="fa fa-envelope"></i>
+          </a>
         </div>
-        <h1 class="mb-1" style="color:#fff;">Anurag Nayak</h1>
-        <h3 class="mb-3" style="color:rgba(255,255,255,0.8);">
-          <em>B.Tech CSE (Data Science &amp; Analytics) @ IIIT Nagpur</em>
-        </h3>
-        <a class="btn btn-xl btn-light js-scroll-trigger" href="#about">Enter Portfolio</a>
-      </div>
 
-      <!-- RIGHT: 3D floating avatar -->
-      <div style="flex:1;min-width:280px;height:100vh;min-height:400px;">
+        <!-- CTAs -->
+        <div class="hero-ctas" style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a class="hero-btn-primary js-scroll-trigger" href="#about">Enter Portfolio</a>
+          <a class="hero-btn-outline" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="_blank">
+            View Resume &nbsp;&#x2197;
+          </a>
+        </div>
+
+      </div><!-- /LEFT -->
+
+      <!-- ── RIGHT: 3D avatar ── -->
+      <div class="hero-right" style="flex:1;min-width:300px;height:100vh;">
         <canvas id="avatar-canvas" style="width:100%;height:100%;display:block;"></canvas>
       </div>
 
