@@ -74,7 +74,7 @@ function initAvatar(canvasId) {
   const scene  = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   /* Camera straight ahead on +Z axis */
-  camera.position.set(0, 0, isMobile ? 5 : 4.5);
+  camera.position.set(0, 0, isMobile ? 6.5 : 5.8);
 
   /* Lights */
   scene.add(new THREE.AmbientLight(0xffffff, 0.5));
@@ -109,7 +109,7 @@ function initAvatar(canvasId) {
     function(gltf) {
       avatarObj = new THREE.Object3D();
       avatarObj.add(gltf.scene);
-      const s = isMobile ? 1.8 : 2.0;
+      const s = isMobile ? 1.3 : 1.5;
       avatarObj.scale.set(s, s, s);
       avatarObj.position.set(0, baseY, 0);
       /* -PI/2 rotates avatar from facing +X → facing +Z (toward camera) */
