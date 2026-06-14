@@ -96,13 +96,13 @@ function initAvatar(canvasId) {
   const controls = new THREE.OrbitControls(camera, canvas);
   controls.enableZoom = false;
   controls.enablePan  = false;
-  controls.target.set(0, -0.3, 0);   /* look at chest level */
+  controls.target.set(0, 0.2, 0);   /* look at chest level */
   controls.maxPolarAngle = Math.PI / 2;
   controls.minPolarAngle = Math.PI / 2;
   controls.update();
 
   let avatarObj = null;
-  const baseY = -2.5;
+  const baseY = -1.6;
 
   new THREE.GLTFLoader().load(
     './avatar/avatar.glb',
@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initStars('stars-hero');
   initStars('stars-skills');
   initStars('stars-timeline');
+  initStars('stars-contact');
   initAvatar('avatar-canvas');
   initTypewriter('hero-typewriter',
     ['Machine Learning Engineer','Computer Vision Researcher',
