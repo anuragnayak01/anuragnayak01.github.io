@@ -257,19 +257,32 @@
   </nav>
 
   <!-- Header -->
-  <header class="masthead d-flex" style="padding-bottom: 100px">
-    <div class="container text-center my-auto">
-      <div class="profile_pic" style="padding-bottom:32px">
-        <img src="./images/me.jpg" class="img-responsive img-circle"
-          style="border:8px solid white; width: 240px; height: 240px;" alt="Anurag Nayak">
+  <header class="masthead d-flex" style="background:#050816 !important; background-image:none !important; position:relative; overflow:hidden; padding-bottom:0; min-height:100vh;">
+    <!-- ★ Animated star background -->
+    <canvas id="stars-hero" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+    <!-- Two-column layout: photo + text on left | 3D avatar on right -->
+    <div style="position:relative;z-index:1;width:100%;display:flex;align-items:center;flex-wrap:wrap;min-height:100vh;">
+
+      <!-- LEFT: your existing content (unchanged) -->
+      <div class="text-center my-auto" style="flex:1;min-width:280px;padding:3rem 1.5rem;">
+        <div class="profile_pic" style="padding-bottom:32px">
+          <img src="./images/me.jpg" class="img-responsive img-circle"
+            style="border:8px solid white; width:240px; height:240px;" alt="Anurag Nayak">
+        </div>
+        <h1 class="mb-1" style="color:#fff;">Anurag Nayak</h1>
+        <h3 class="mb-3" style="color:rgba(255,255,255,0.8);">
+          <em>B.Tech CSE (Data Science &amp; Analytics) @ IIIT Nagpur</em>
+        </h3>
+        <a class="btn btn-xl btn-light js-scroll-trigger" href="#about">Enter Portfolio</a>
       </div>
-      <h1 class="mb-1">Anurag Nayak</h1>
-      <h3 class="mb-3">
-        <em>B.Tech CSE (Data Science &amp; Analytics) @ IIIT Nagpur</em>
-      </h3>
-      <a class="btn btn-xl btn-light js-scroll-trigger" href="#about">Enter Portfolio</a>
+
+      <!-- RIGHT: 3D floating avatar -->
+      <div style="flex:1;min-width:280px;height:100vh;min-height:400px;">
+        <canvas id="avatar-canvas" style="width:100%;height:100%;display:block;"></canvas>
+      </div>
+
     </div>
-    <div class="overlay"></div>
   </header>
 
   <!-- Intro / About -->
@@ -329,7 +342,11 @@
   </section>
 
   <!-- Skills -->
-  <section class="content-section bg-primary text-white text-center" id="skills">
+  <!-- Skills -->
+  <section class="content-section text-white text-center" id="skills" style="background:#050816;position:relative;overflow:hidden;">
+    <!-- ★ Stars background -->
+    <canvas id="stars-skills" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="content-section-heading">
         <h2 class="mb-2">Skills</h2>
@@ -446,6 +463,7 @@
 
       </div>
     </div>
+    </div><!-- end stars z-index wrapper -->
   </section>
 
   <!-- Projects Section -->
@@ -674,13 +692,17 @@
             </div>
           </div>
 
-         
 
-        
+        </div><!-- end .row -->
+      </div><!-- end .portfolio-container -->
+    </div><!-- end .container -->
   </section>
 
   <!-- Experience / Timeline Section -->
-  <section class="content-section bg-primary text-white" id="timeline">
+  <section class="content-section text-white" id="timeline" style="background:#050816;position:relative;overflow:hidden;">
+    <!-- ★ Stars background -->
+    <canvas id="stars-timeline" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -734,6 +756,7 @@
         </div>
       </div>
     </div>
+    </div><!-- end stars z-index wrapper -->
   </section>
 
 
@@ -1024,6 +1047,12 @@
   <!-- Custom scripts -->
   <script src="js/agency.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- Three.js + 3D Avatar + Stars -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/three-effects.js"></script>
 
 </body>
 </html>
