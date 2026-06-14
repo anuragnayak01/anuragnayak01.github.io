@@ -258,138 +258,184 @@
 
   <!-- Header -->
   <style>
-    .hero-gradient-text {
+    /* ── Force override Kaushan Script on hero name ── */
+    h1.hero-name {
+      font-family: 'Montserrat', 'Arial Black', Arial, sans-serif !important;
+      font-style:  normal !important;
+      font-weight: 900   !important;
+      letter-spacing: -1px;
+      line-height: 1.05;
+      font-size: clamp(2.6rem, 4.8vw, 4rem);
       background: linear-gradient(135deg, #915eff 0%, #f272c8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      margin: 0 0 .75rem 0;
     }
-    .hero-btn-primary {
+    .hero-tag {
+      color: #888;
+      font-size: .78rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: .55rem;
+    }
+    .hero-bar {
+      width: 56px; height: 4px;
+      background: linear-gradient(90deg, #915eff, #f272c8);
+      border-radius: 2px;
+      margin: 0 0 1rem 0;
+    }
+    .hero-college {
+      color: rgba(255,255,255,.7);
+      font-size: .88rem;
+      letter-spacing: .5px;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: .45rem;
+    }
+    .hero-tw-wrap {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f272c8;
+      min-height: 1.6em;
+      margin-bottom: 1.6rem;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-cursor {
       display: inline-block;
-      padding: .7rem 2rem;
+      width: 2px; height: 1em;
+      background: #f272c8;
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink .9s step-end infinite;
+    }
+    .hero-socials { display:flex; gap:.65rem; margin-bottom:1.7rem; }
+    .hero-soc-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: inline-flex; align-items:center; justify-content:center;
+      font-size: 1rem;
+      text-decoration: none !important;
+      transition: transform .22s, background .22s, color .22s;
+    }
+    .hero-soc-btn:hover { transform: translateY(-3px); }
+    .hero-ctas { display:flex; gap:.85rem; flex-wrap:wrap; }
+    .hero-btn-fill {
+      display: inline-block;
+      padding: .65rem 1.9rem;
       background: linear-gradient(135deg, #915eff, #f272c8);
       color: #fff !important;
       border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: .9rem;
-      letter-spacing: 1.2px;
-      text-decoration: none !important;
-      transition: opacity .25s, transform .25s;
+      font-size: .82rem;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
+      text-decoration: none !important;
+      transition: opacity .22s, transform .22s;
     }
-    .hero-btn-primary:hover { opacity:.85; transform:translateY(-2px); }
-    .hero-btn-outline {
+    .hero-btn-fill:hover { opacity:.82; transform:translateY(-2px); }
+    .hero-btn-ghost {
       display: inline-block;
-      padding: .7rem 2rem;
-      border: 2px solid #915eff;
-      color: #915eff !important;
+      padding: .65rem 1.9rem;
+      border: 2px solid rgba(145,94,255,.7);
+      color: #b388ff !important;
       border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: .9rem;
-      letter-spacing: 1.2px;
-      text-decoration: none !important;
-      transition: background .25s, color .25s, transform .25s;
+      font-size: .82rem;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
+      text-decoration: none !important;
+      transition: border-color .22s, background .22s, color .22s, transform .22s;
     }
-    .hero-btn-outline:hover {
-      background: #915eff;
+    .hero-btn-ghost:hover {
+      border-color: #915eff;
+      background: rgba(145,94,255,.15);
       color: #fff !important;
       transform: translateY(-2px);
     }
-    .hero-social-link {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      display: inline-flex; align-items: center; justify-content: center;
-      text-decoration: none !important;
-      font-size: 1.1rem;
-      transition: transform .25s, background .25s, color .25s;
-    }
-    .hero-social-link:hover { transform: translateY(-3px); }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .cursor { display:inline-block; animation: blink 1s step-end infinite; margin-left:2px; color:#f272c8; }
-    @media (max-width:768px) {
-      .hero-left { text-align:center !important; padding:5rem 1.5rem 2rem !important; }
-      .hero-right { height:55vh !important; }
-      .hero-socials { justify-content:center !important; }
-      .hero-ctas { justify-content:center !important; }
+    /* Responsive */
+    @media (max-width: 820px) {
+      .hero-inner { flex-direction: column !important; }
+      .hero-left  { width:100% !important; padding: 5rem 8% 2rem !important; text-align:center; }
+      .hero-left .hero-bar { margin-left:auto; margin-right:auto; }
+      .hero-left .hero-socials { justify-content:center; }
+      .hero-left .hero-ctas    { justify-content:center; }
+      .hero-right { width:100% !important; height:55vh !important; }
     }
   </style>
 
-  <header class="masthead" style="background:#050816 !important; background-image:none !important; position:relative; overflow:hidden; padding:0; min-height:100vh;">
-    <!-- ★ Stars canvas -->
-    <canvas id="stars-hero" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+  <header class="masthead" style="background:#050816 !important;background-image:none !important;min-height:100vh;padding:0;position:relative;overflow:hidden;">
 
-    <!-- subtle purple glow accents -->
-    <div style="position:absolute;top:-10%;left:-5%;width:420px;height:420px;background:radial-gradient(circle,rgba(145,94,255,.18) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
-    <div style="position:absolute;bottom:-5%;right:5%;width:320px;height:320px;background:radial-gradient(circle,rgba(242,114,200,.13) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+    <!-- ★ Stars -->
+    <canvas id="stars-hero" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 
-    <!-- two-column flex -->
-    <div style="position:relative;z-index:1;width:100%;min-height:100vh;display:flex;align-items:center;flex-wrap:wrap;">
+    <!-- Glow blobs -->
+    <div style="position:absolute;top:-8%;left:2%;width:480px;height:480px;background:radial-gradient(circle,rgba(145,94,255,.14) 0%,transparent 68%);pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;bottom:-4%;right:8%;width:340px;height:340px;background:radial-gradient(circle,rgba(242,114,200,.10) 0%,transparent 68%);pointer-events:none;z-index:0;"></div>
 
-      <!-- ── LEFT: text content ── -->
-      <div class="hero-left" style="flex:1;min-width:300px;padding:6rem 4% 4rem 7%;">
+    <!-- Main row -->
+    <div class="hero-inner" style="position:relative;z-index:1;width:100%;min-height:100vh;display:flex;align-items:center;">
 
-        <!-- greeting tag -->
-        <p style="color:#aaa;font-size:.85rem;letter-spacing:3.5px;text-transform:uppercase;margin-bottom:.6rem;">
-          Hello, World! &nbsp;👋
-        </p>
+      <!-- LEFT -->
+      <div class="hero-left" style="width:50%;padding:0 4% 0 8%;display:flex;flex-direction:column;justify-content:center;min-height:100vh;">
 
-        <!-- name -->
-        <h1 class="hero-gradient-text" style="font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;line-height:1.05;margin-bottom:.8rem;">
-          Anurag Nayak
-        </h1>
+        <p class="hero-tag">Hello, World! &nbsp;👋</p>
 
-        <!-- accent bar -->
-        <div style="width:64px;height:4px;background:linear-gradient(90deg,#915eff,#f272c8);border-radius:2px;margin-bottom:1.1rem;"></div>
+        <h1 class="hero-name">Anurag Nayak</h1>
 
-        <!-- college -->
-        <p style="color:rgba(255,255,255,.75);font-size:.95rem;letter-spacing:.4px;margin-bottom:.5rem;">
+        <div class="hero-bar"></div>
+
+        <p class="hero-college">
           B.Tech CSE &nbsp;·&nbsp; Data Science &amp; Analytics &nbsp;·&nbsp; IIIT Nagpur
         </p>
 
-        <!-- typewriter -->
-        <p style="color:#f272c8;font-size:1.05rem;font-weight:500;min-height:1.7em;margin-bottom:1.8rem;">
-          <span id="hero-typewriter"></span><span class="cursor">|</span>
-        </p>
+        <div class="hero-tw-wrap">
+          <span id="hero-typewriter"></span><span class="hero-cursor"></span>
+        </div>
 
-        <!-- social icons -->
-        <div class="hero-socials" style="display:flex;gap:.75rem;margin-bottom:2rem;">
-          <a class="hero-social-link" href="https://github.com/anuragnayak01" target="_blank"
+        <!-- Socials -->
+        <div class="hero-socials">
+          <a class="hero-soc-btn" href="https://github.com/anuragnayak01" target="_blank"
              style="border:2px solid #915eff;color:#915eff;"
              onmouseover="this.style.background='#915eff';this.style.color='#fff';"
              onmouseout="this.style.background='transparent';this.style.color='#915eff';">
             <i class="fa fa-github"></i>
           </a>
-          <a class="hero-social-link" href="https://linkedin.com/in/anurag-nayak" target="_blank"
+          <a class="hero-soc-btn" href="https://linkedin.com/in/anurag-nayak" target="_blank"
              style="border:2px solid #f272c8;color:#f272c8;"
              onmouseover="this.style.background='#f272c8';this.style.color='#fff';"
              onmouseout="this.style.background='transparent';this.style.color='#f272c8';">
             <i class="fa fa-linkedin"></i>
           </a>
-          <a class="hero-social-link" href="mailto:nayakanurag2004@gmail.com"
-             style="border:2px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);"
-             onmouseover="this.style.borderColor='#fff';this.style.color='#fff';"
-             onmouseout="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)';">
+          <a class="hero-soc-btn" href="mailto:nayakanurag2004@gmail.com"
+             style="border:2px solid rgba(255,255,255,.25);color:rgba(255,255,255,.55);"
+             onmouseover="this.style.borderColor='rgba(255,255,255,.7)';this.style.color='#fff';"
+             onmouseout="this.style.borderColor='rgba(255,255,255,.25)';this.style.color='rgba(255,255,255,.55)';">
             <i class="fa fa-envelope"></i>
           </a>
         </div>
 
         <!-- CTAs -->
-        <div class="hero-ctas" style="display:flex;gap:1rem;flex-wrap:wrap;">
-          <a class="hero-btn-primary js-scroll-trigger" href="#about">Enter Portfolio</a>
-          <a class="hero-btn-outline" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="_blank">
-            View Resume &nbsp;&#x2197;
+        <div class="hero-ctas">
+          <a class="hero-btn-fill js-scroll-trigger" href="#about">Enter Portfolio</a>
+          <a class="hero-btn-ghost" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="_blank">
+            View Resume &#x2197;
           </a>
         </div>
 
       </div><!-- /LEFT -->
 
-      <!-- ── RIGHT: 3D avatar ── -->
-      <div class="hero-right" style="flex:1;min-width:300px;height:100vh;">
+      <!-- RIGHT: avatar -->
+      <div class="hero-right" style="width:50%;height:100vh;position:relative;">
+        <!-- subtle ring backdrop behind avatar -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(145,94,255,.09) 0%,transparent 70%);border:1px solid rgba(145,94,255,.1);pointer-events:none;"></div>
         <canvas id="avatar-canvas" style="width:100%;height:100%;display:block;"></canvas>
       </div>
 
-    </div>
+    </div><!-- /hero-inner -->
   </header>
 
   <!-- Intro / About -->
