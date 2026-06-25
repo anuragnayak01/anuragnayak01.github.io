@@ -113,7 +113,7 @@ function initAvatar(canvasId) {
       avatarObj.scale.set(s, s, s);
       avatarObj.position.set(0, baseY, 0);
       /* -PI/2 rotates avatar from facing +X → facing +Z (toward camera) */
-      avatarObj.rotation.set(0, Math.PI / 6, 0); 
+      avatarObj.rotation.set(0, -Math.PI / 6, 0); 
       scene.add(avatarObj);
     },
     undefined,
