@@ -166,10 +166,10 @@ document.addEventListener('DOMContentLoaded', function() {
   initStars('stars-skills');
   initStars('stars-timeline');
   initStars('stars-contact');
+  initStars('stars-about');
+  initStars('stars-certificates');
   initAvatar('avatar-canvas');
   initTypewriter('hero-typewriter',
-   initStars('stars-about');
-  initStars('stars-certificates');
     ['Machine Learning Engineer','Computer Vision Researcher',
      'Data Scientist','Deep Learning Enthusiast'], 75);
 });
