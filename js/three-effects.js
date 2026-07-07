@@ -168,6 +168,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initStars('stars-contact');
   initAvatar('avatar-canvas');
   initTypewriter('hero-typewriter',
+   initStars('stars-about');
+  initStars('stars-certificates');
     ['Machine Learning Engineer','Computer Vision Researcher',
      'Data Scientist','Deep Learning Enthusiast'], 75);
 });
