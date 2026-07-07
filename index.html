@@ -211,6 +211,139 @@
     .cert-scroll-hint i {
       margin-left: 4px;
     }
+
+    /* ===== PROJECTS SECTION — force visible text on dark bg ===== */
+    #projects .content-section-heading h2,
+    #projects h2.mb-3 {
+      color: #ffffff !important;
+    }
+    #projects .lead {
+      color: #c7c9d1 !important;
+    }
+    #projects #portfolio-flters {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
+      margin: 0 0 2rem 0;
+    }
+    #projects #portfolio-flters li {
+      color: #c7c9d1 !important;
+      cursor: pointer;
+      padding: 8px 20px;
+      border: 1px solid rgba(145,94,255,.4);
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      transition: all .25s ease;
+    }
+    #projects #portfolio-flters li:hover,
+    #projects #portfolio-flters li.filter-active {
+      background: linear-gradient(135deg, #915eff, #f272c8);
+      border-color: transparent;
+      color: #fff !important;
+    }
+
+    /* ===== EXPERIENCE / TIMELINE — redesigned ===== */
+    #timeline .content-section-heading h2,
+    #timeline h2.section-heading {
+      color: #fff !important;
+    }
+    .exp-timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 2.5rem auto 0;
+      padding-left: 0;
+    }
+    .exp-timeline::before {
+      content: "";
+      position: absolute;
+      left: 29px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, #915eff, #f272c8);
+      opacity: .5;
+    }
+    .exp-item {
+      position: relative;
+      display: flex;
+      gap: 24px;
+      padding-bottom: 2.6rem;
+    }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-icon {
+      flex: 0 0 60px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #0b0e1e;
+      border: 2px solid rgba(145,94,255,.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 0 0 6px #050816;
+    }
+    .exp-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .exp-card {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px 24px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .exp-item:hover .exp-card {
+      transform: translateY(-3px);
+      border-color: rgba(145,94,255,.5);
+      background: rgba(255,255,255,0.06);
+    }
+    .exp-date {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #f272c8;
+      margin-bottom: 6px;
+    }
+    .exp-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 4px;
+    }
+    .exp-title a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255,255,255,.35);
+    }
+    .exp-title a:hover {
+      color: #f272c8;
+      border-bottom-color: #f272c8;
+    }
+    .exp-org {
+      font-size: .92rem;
+      color: #b8bac4;
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .exp-timeline::before { left: 23px; }
+      .exp-icon { flex: 0 0 48px; width: 48px; height: 48px; }
+      .exp-card { padding: 14px 16px; }
+    }
   </style>
 
 </head>
@@ -457,7 +590,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-lg-8" id="intro-section" style="margin-bottom: 1rem; margin-top:1rem">
-          <h4>Anurag Nayak</h4>
+          <h4 style="color:#fff;">Anurag Nayak</h4>
           <p class="lead" style="color: grey"><b>IIIT Nagpur '27, B.Tech CSE Data Science &amp; Analytics</b></p>
           <p class="lead" style="font-size: 14pt; color: #e8e8e8">
             <b>Radhe Radhe! My name is Anurag Nayak. I am an undergraduate student of the Department of Computer Science and Engineering at the Indian Institute of Information Technology Nagpur, specializing in Data Science and Analytics. I'm from Sagar, Madhya Pradesh.</b>
@@ -484,7 +617,7 @@
     <div class="container text-center">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-          <h2 class="mb-4">Get to know more about my :</h2>
+          <h2 class="mb-4" style="color:#fff;">Get to know more about my :</h2>
           <a class="btn btn-light btn-xl ml-2 mr-2 mb-3 js-scroll-trigger about-btn" href="#skills">Skills</a>
           <a class="btn btn-light btn-xl ml-2 mr-2 mb-3 js-scroll-trigger about-btn" href="#projects">Projects</a>
           <a class="btn btn-light btn-xl ml-2 mr-2 mb-3 js-scroll-trigger about-btn" href="#timeline">Experience</a>
@@ -864,52 +997,40 @@
           <h2 class="section-heading mb-2">Experience</h2>
         </div>
       </div>
-      <div class="container text-center mb-5">
-        <p class="lead">  </p>
+      <div class="container text-center mb-4">
+        <p class="lead" style="color:#c7c9d1;">A quick look at where I've studied and worked</p>
       </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <ul class="timeline">
 
-            <li class="timeline-inverted" style="margin-bottom:32px">
-              <a href="https://iiitn.ac.in/" target="blank">
-                <div class="timeline-image">
-                  <img class="img-circle img-responsive" src="./images/iiitn_logo.webp" alt="IIIT Nagpur">
-                </div>
-              </a>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h5>July 2023 – Present</h5>
-                  <h4 class="subheading">
-                    <a href="https://iiitn.ac.in/" target="blank">B.Tech CSE  Data Science &amp; Analytics</a>,<br>IIIT Nagpur, Maharashtra
-                  </h4>
-                </div>
-                <div class="timeline-body">
-                  <p class="lead" </p>
-                </div>
-              </div>
-            </li>
+      <div class="exp-timeline">
 
-            <li>
-              <a href="https://github.com/anuragnayak01" target="blank">
-                <div class="timeline-image">
-                  <img class="img-circle img-responsive" src="./images/mlresearch.jpg" alt="ML Research">
-                </div>
-              </a>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h5>May 2026  -  Present </h5>
-                  <h4 class="subheading">Research Intern IIT Ropar   </h4>
-                </div>
-                <div class="timeline-body">
-                  <p class="lead">  </p>
-                </div>
-              </div>
-            </li>
-
-          </ul>
+        <div class="exp-item">
+          <div class="exp-icon">
+            <img src="./images/iiitn_logo.webp" alt="IIIT Nagpur">
+          </div>
+          <div class="exp-card">
+            <span class="exp-date">July 2023 – Present</span>
+            <h4 class="exp-title">
+              <a href="https://iiitn.ac.in/" target="blank">B.Tech CSE, Data Science &amp; Analytics</a>
+            </h4>
+            <p class="exp-org">IIIT Nagpur, Maharashtra</p>
+          </div>
         </div>
+
+        <div class="exp-item">
+          <div class="exp-icon">
+            <img src="./images/mlresearch.jpg" alt="ML Research">
+          </div>
+          <div class="exp-card">
+            <span class="exp-date">May 2026 – Present</span>
+            <h4 class="exp-title">
+              <a href="https://github.com/anuragnayak01" target="blank">Research Intern</a>
+            </h4>
+            <p class="exp-org">IIT Ropar</p>
+          </div>
+        </div>
+
       </div>
+
     </div>
     </div><!-- end stars z-index wrapper -->
   </section>
