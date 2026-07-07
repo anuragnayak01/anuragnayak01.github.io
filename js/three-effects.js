@@ -162,12 +162,6 @@ function initTypewriter(elId, words, speed) {
 
 /* ── Boot ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
-  initStars('stars-hero');
-  initStars('stars-skills');
-  initStars('stars-timeline');
-  initStars('stars-contact');
-  initStars('stars-about');
-  initStars('stars-certificates');
   initAvatar('avatar-canvas');
   initTypewriter('hero-typewriter',
     ['Machine Learning Engineer','Computer Vision Researcher',
