@@ -438,7 +438,9 @@
   </header>
 
   <!-- Intro / About -->
-  <section class="content-section" style="background:#edeeef; padding-top: 4rem; padding-bottom: 6rem " id="about">
+  <section class="content-section text-white" id="about" style="background:#050816;position:relative;overflow:hidden;padding-top:4rem;padding-bottom:6rem;">
+    <canvas id="stars-about" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-lg-4">
@@ -490,6 +492,7 @@
             <i class="fa fa-file-pdf-o"></i> Resume</a>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -914,13 +917,15 @@
 
   <!-- ==================== CERTIFICATES SECTION ==================== -->
   <section id="certificates">
+    <canvas id="stars-certificates" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <div style="position:relative;z-index:1;">
     <div class="container">
 
       <div class="cert-section-title">
         <h2>Certificates</h2>
         <hr>
       </div>
-
+    
       <!-- ── HACKATHON PARTICIPATION ── -->
       <h4 class="cert-category-heading">Hackathon Participation</h4>
       <p class="cert-scroll-hint">Scroll to explore &nbsp;<i class="fa fa-arrow-right"></i></p>
@@ -1097,6 +1102,7 @@
 
       </div><!-- end certificates scroll track -->
 
+    </div>
     </div>
   </section>
   <!-- ==================== END CERTIFICATES ==================== -->
