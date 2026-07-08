@@ -517,6 +517,50 @@
       font-weight: 600 !important;
       text-shadow: 0 2px 8px rgba(0,0,0,.9);
     }
+
+    /* ===== INTERACTIVE HOVER / CURSOR-MOVE / ARROW-KEY EFFECTS ===== */
+    #projects .portfolio-item .col {
+      --mx: 50%;
+      --my: 50%;
+      cursor: pointer;
+      transition: transform .3s ease;
+      outline: none;
+      border-radius: 12px;
+    }
+    #projects .portfolio-item .col:hover,
+    #projects .portfolio-item .col.touch-active,
+    #projects .portfolio-item .col.kb-active {
+      transform: translateY(-8px) scale(1.02);
+    }
+    #projects .project-container {
+      transition: box-shadow .3s ease;
+      border-radius: 12px;
+    }
+    #projects .portfolio-item .col:hover .project-container,
+    #projects .portfolio-item .col.touch-active .project-container,
+    #projects .portfolio-item .col.kb-active .project-container {
+      box-shadow: 0 20px 44px rgba(145,94,255,.4), 0 8px 20px rgba(242,114,200,.25);
+    }
+    /* Spotlight that tracks the cursor position across the card */
+    #projects .project-container .front::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .25s ease;
+      background: radial-gradient(220px circle at var(--mx) var(--my), rgba(255,255,255,.25), transparent 60%);
+    }
+    #projects .portfolio-item .col:hover .project-container .front::after,
+    #projects .portfolio-item .col.touch-active .project-container .front::after,
+    #projects .portfolio-item .col.kb-active .project-container .front::after {
+      opacity: 1;
+    }
+    /* Keyboard focus (arrow-key navigation) gets its own visible ring */
+    #projects .portfolio-item .col.kb-active {
+      box-shadow: 0 0 0 2px rgba(145,94,255,.85), 0 0 0 6px rgba(145,94,255,.18);
+    }
     .project-front-gradient {
       position: absolute;
       inset: 0;
@@ -1799,6 +1843,64 @@
         setTimeout(function() { el.classList.remove('touch-active'); }, 450);
       }
     }, { passive: true });
+  })();
+  </script>
+
+  <!-- Project cards: cursor-move spotlight effect + arrow-key navigation -->
+  <script>
+  (function() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('#projects .portfolio-item .col'));
+    if (!cards.length) return;
+
+    cards.forEach(function(card) {
+      card.setAttribute('tabindex', '0');
+
+      // Spotlight follows the mouse (the "arrow") as it moves across the card
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var mx = ((e.clientX - rect.left) / rect.width) * 100;
+        var my = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mx', mx + '%');
+        card.style.setProperty('--my', my + '%');
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.setProperty('--mx', '50%');
+        card.style.setProperty('--my', '50%');
+      });
+
+      // Keyboard focus mirrors the hover effect
+      card.addEventListener('focus', function() { card.classList.add('kb-active'); });
+      card.addEventListener('blur', function() { card.classList.remove('kb-active'); });
+    });
+
+    // Arrow-key navigation between visible cards (grid-aware)
+    document.addEventListener('keydown', function(e) {
+      var keys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
+      if (keys.indexOf(e.key) === -1) return;
+
+      var active = document.activeElement;
+      if (!active || !active.classList || !active.classList.contains('col') || !active.closest('#projects')) return;
+
+      var visible = cards.filter(function(c) {
+        var item = c.closest('.portfolio-item');
+        return item && item.style.display !== 'none';
+      });
+      var idx = visible.indexOf(active);
+      if (idx === -1) return;
+
+      e.preventDefault();
+
+      var cols = window.matchMedia('(min-width: 992px)').matches ? 3
+               : window.matchMedia('(min-width: 768px)').matches ? 2 : 1;
+
+      var next = idx;
+      if (e.key === 'ArrowRight') next = Math.min(idx + 1, visible.length - 1);
+      if (e.key === 'ArrowLeft')  next = Math.max(idx - 1, 0);
+      if (e.key === 'ArrowDown')  next = Math.min(idx + cols, visible.length - 1);
+      if (e.key === 'ArrowUp')    next = Math.max(idx - cols, 0);
+
+      if (visible[next]) visible[next].focus();
+    });
   })();
   </script>
 
