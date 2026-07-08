@@ -124,10 +124,11 @@
       display: block;
     }
 
-    .cert-card:hover {
-      transform: translateY(-6px) !important;
-      box-shadow: 0 14px 32px rgba(145,94,255,0.28) !important;
-      border-color: rgba(145,94,255,.55) !important;
+    .cert-card:hover,
+    .cert-card.touch-active {
+      transform: translateY(-6px) scale(1.015) !important;
+      box-shadow: 0 16px 36px rgba(145,94,255,0.32) !important;
+      border-color: rgba(145,94,255,.6) !important;
     }
 
     /* ── Image area ── */
@@ -141,8 +142,9 @@
       transition: transform 0.35s ease;
     }
 
-    .cert-card:hover .cert-card-img {
-      transform: scale(1.05);
+    .cert-card:hover .cert-card-img,
+    .cert-card.touch-active .cert-card-img {
+      transform: scale(1.08);
     }
 
     /* Placeholder shimmer for empty slots */
@@ -364,19 +366,23 @@
       justify-content: center;
       transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease !important;
     }
-    #skills .service-icon:hover {
-      transform: translateY(-6px) !important;
-      background: rgba(145,94,255,.12) !important;
-      border-color: rgba(145,94,255,.6) !important;
-      box-shadow: 0 10px 24px rgba(145,94,255,.25) !important;
+    #skills .service-icon:hover,
+    #skills .service-icon.touch-active {
+      transform: translateY(-6px) scale(1.04) !important;
+      background: rgba(145,94,255,.14) !important;
+      border-color: rgba(145,94,255,.7) !important;
+      box-shadow: 0 12px 28px rgba(145,94,255,.32) !important;
     }
     #skills .service-icon i,
     #skills .service-icon img {
-      transition: transform .25s ease !important;
+      transition: transform .25s ease, filter .25s ease !important;
     }
     #skills .service-icon:hover i,
-    #skills .service-icon:hover img {
-      transform: scale(1.08) !important;
+    #skills .service-icon:hover img,
+    #skills .service-icon.touch-active i,
+    #skills .service-icon.touch-active img {
+      transform: scale(1.1) !important;
+      filter: drop-shadow(0 0 6px rgba(145,94,255,.5));
     }
 
     /* ===== ABOUT SECTION — social icon background + hover ===== */
@@ -395,11 +401,38 @@
       transition: transform .22s ease, background .22s ease, border-color .22s ease !important;
     }
     #social1 .social-buttons a:hover,
-    #social2 .social-buttons a:hover {
-      transform: translateY(-4px) !important;
+    #social1 .social-buttons a.touch-active,
+    #social2 .social-buttons a:hover,
+    #social2 .social-buttons a.touch-active {
+      transform: translateY(-4px) scale(1.06) !important;
       background: linear-gradient(135deg, #915eff, #f272c8) !important;
       border-color: transparent !important;
       color: #fff !important;
+      box-shadow: 0 8px 18px rgba(145,94,255,.35) !important;
+    }
+
+    /* ===== HERO SOCIAL BUTTONS — refactored to classes (touch-compatible) ===== */
+    .hero-soc-btn.gh { border:2px solid #915eff; color:#915eff; }
+    .hero-soc-btn.gh:hover, .hero-soc-btn.gh.touch-active {
+      background:#915eff; color:#fff;
+    }
+    .hero-soc-btn.li { border:2px solid #f272c8; color:#f272c8; }
+    .hero-soc-btn.li:hover, .hero-soc-btn.li.touch-active {
+      background:#f272c8; color:#fff;
+    }
+    .hero-soc-btn.mail { border:2px solid rgba(255,255,255,.25); color:rgba(255,255,255,.55); }
+    .hero-soc-btn.mail:hover, .hero-soc-btn.mail.touch-active {
+      border-color:rgba(255,255,255,.7); color:#fff;
+    }
+
+    /* ===== PROJECT FLIP CARDS — fix touch flip (JS toggles .hover on .col) ===== */
+    .col.hover .project-container .front {
+      -webkit-transform: rotateY(-180deg) !important;
+      transform: rotateY(-180deg) !important;
+    }
+    .col.hover .project-container .back {
+      -webkit-transform: rotateY(0deg) !important;
+      transform: rotateY(0deg) !important;
     }
   </style>
 
@@ -581,22 +614,13 @@
 
         <!-- Socials -->
         <div class="hero-socials">
-          <a class="hero-soc-btn" href="https://github.com/anuragnayak01" target="_blank"
-             style="border:2px solid #915eff;color:#915eff;"
-             onmouseover="this.style.background='#915eff';this.style.color='#fff';"
-             onmouseout="this.style.background='transparent';this.style.color='#915eff';">
+          <a class="hero-soc-btn gh" href="https://github.com/anuragnayak01" target="_blank">
             <i class="fa fa-github"></i>
           </a>
-          <a class="hero-soc-btn" href="https://linkedin.com/in/anurag-nayak" target="_blank"
-             style="border:2px solid #f272c8;color:#f272c8;"
-             onmouseover="this.style.background='#f272c8';this.style.color='#fff';"
-             onmouseout="this.style.background='transparent';this.style.color='#f272c8';">
+          <a class="hero-soc-btn li" href="https://linkedin.com/in/anurag-nayak" target="_blank">
             <i class="fa fa-linkedin"></i>
           </a>
-          <a class="hero-soc-btn" href="mailto:nayakanurag2004@gmail.com"
-             style="border:2px solid rgba(255,255,255,.25);color:rgba(255,255,255,.55);"
-             onmouseover="this.style.borderColor='rgba(255,255,255,.7)';this.style.color='#fff';"
-             onmouseout="this.style.borderColor='rgba(255,255,255,.25)';this.style.color='rgba(255,255,255,.55)';">
+          <a class="hero-soc-btn mail" href="mailto:nayakanurag2004@gmail.com">
             <i class="fa fa-envelope"></i>
           </a>
         </div>
@@ -1377,6 +1401,33 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="js/three-effects.js"></script>
+
+  <!-- Touch-compatibility: simulate hover effects on tap for touchscreen devices -->
+  <script>
+  (function() {
+    var touchTargets = '.service-icon, .cert-card, #social1 .social-buttons a, #social2 .social-buttons a, .hero-soc-btn';
+
+    function clearActive(except) {
+      document.querySelectorAll('.touch-active').forEach(function(el) {
+        if (el !== except) el.classList.remove('touch-active');
+      });
+    }
+
+    document.addEventListener('touchstart', function(e) {
+      var el = e.target.closest(touchTargets);
+      if (!el) { clearActive(); return; }
+      clearActive(el);
+      el.classList.add('touch-active');
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+      var el = e.target.closest(touchTargets);
+      if (el) {
+        setTimeout(function() { el.classList.remove('touch-active'); }, 450);
+      }
+    }, { passive: true });
+  })();
+  </script>
 
 </body>
 </html>
