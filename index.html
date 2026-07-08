@@ -561,6 +561,42 @@
     #projects .portfolio-item .col.kb-active {
       box-shadow: 0 0 0 2px rgba(145,94,255,.85), 0 0 0 6px rgba(145,94,255,.18);
     }
+    /* Circular arrow button that follows the cursor around the card ("magnetic" arrow) */
+    #projects .project-container .front .cursor-arrow-badge {
+      position: absolute;
+      z-index: 3;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #915eff, #f272c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.25rem;
+      opacity: 0;
+      left: var(--mx, 50%);
+      top: var(--my, 50%);
+      transform: translate(-50%, -50%) scale(.5);
+      transition: opacity .25s ease, transform .18s cubic-bezier(.2,.8,.2,1), left .12s linear, top .12s linear;
+      pointer-events: none;
+      box-shadow: 0 12px 28px rgba(145,94,255,.5);
+    }
+    #projects .portfolio-item .col:hover .cursor-arrow-badge,
+    #projects .portfolio-item .col.touch-active .cursor-arrow-badge,
+    #projects .portfolio-item .col.kb-active .cursor-arrow-badge {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    #projects .portfolio-item .col:hover .cursor-arrow-badge i,
+    #projects .portfolio-item .col.touch-active .cursor-arrow-badge i,
+    #projects .portfolio-item .col.kb-active .cursor-arrow-badge i {
+      animation: arrowPulse .55s ease;
+    }
+    @keyframes arrowPulse {
+      0%   { transform: translate(-3px, 3px); opacity: .4; }
+      100% { transform: translate(0, 0); opacity: 1; }
+    }
     .project-front-gradient {
       position: absolute;
       inset: 0;
@@ -1854,6 +1890,15 @@
 
     cards.forEach(function(card) {
       card.setAttribute('tabindex', '0');
+
+      // Inject the cursor-following arrow badge onto the front face
+      var front = card.querySelector('.project-container .front');
+      if (front && !front.querySelector('.cursor-arrow-badge')) {
+        var badge = document.createElement('div');
+        badge.className = 'cursor-arrow-badge';
+        badge.innerHTML = '<i class="fa fa-arrow-right" style="transform:rotate(-45deg);"></i>';
+        front.appendChild(badge);
+      }
 
       // Spotlight follows the mouse (the "arrow") as it moves across the card
       card.addEventListener('mousemove', function(e) {
