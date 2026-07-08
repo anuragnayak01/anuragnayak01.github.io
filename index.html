@@ -476,6 +476,19 @@
     /* the flip card because the template vertically centers .inner via a  */
     /* transform based on content height — for 2+ line titles this pushes  */
     /* the first line above the card's clipped edge. Anchor to top instead.*/
+    #projects .project-container .front {
+      position: relative;
+      overflow: hidden;
+    }
+    /* Dark scrim behind the text so it stays crisp & bright over any image/gradient */
+    #projects .project-container .front::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.62) 42%, rgba(0,0,0,.15) 78%, rgba(0,0,0,0) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
     #projects .project-container .front .inner {
       position: absolute !important;
       top: 0 !important;
@@ -489,10 +502,20 @@
       align-items: center !important;
       text-align: center !important;
       padding: 26px 18px 0 !important;
+      z-index: 2 !important;
     }
     #projects .project-container .front .inner p {
       margin: 0 0 10px !important;
       line-height: 1.3 !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      letter-spacing: .2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.95), 0 0 3px rgba(0,0,0,1);
+    }
+    #projects .project-container .front .inner span {
+      color: #f4f4f8 !important;
+      font-weight: 600 !important;
+      text-shadow: 0 2px 8px rgba(0,0,0,.9);
     }
     .project-front-gradient {
       position: absolute;
@@ -503,8 +526,6 @@
       pointer-events: none;
       z-index: 0;
     }
-    .project-container .front { position: relative; }
-    .project-container .front .inner { position: relative; z-index: 1; }
   </style>
 
 </head>
@@ -914,6 +935,7 @@
             <li data-filter=".filter-cv">Computer Vision</li>
             <li data-filter=".filter-data">Data Analysis</li>
             <li data-filter=".filter-se">Software Engg.</li>
+            <li data-filter=".filter-ai">AI Agents / LLM</li>
           </ul>
         </div>
       </div>
@@ -1185,7 +1207,7 @@
           </div>
 
           <!-- NEW: Real-Time Support Triage (InsightPulse) -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se">
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se filter-ai">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
                 <div class="front" style="background:linear-gradient(135deg,#1a2438,#1c2140);">
@@ -1281,7 +1303,7 @@
           </div>
 
           <!-- NEW: PediTriage -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se">
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se filter-ai">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
               <div class="project-container">
                 <div class="front" style="background:linear-gradient(135deg,#1a2438,#2a1a3a);">
