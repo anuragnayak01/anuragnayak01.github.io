@@ -606,6 +606,75 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    /* ===== GLOBAL CURSOR-FOLLOW EFFECT — applies across every section ===== */
+    html.has-custom-cursor,
+    html.has-custom-cursor a,
+    html.has-custom-cursor button,
+    html.has-custom-cursor input,
+    html.has-custom-cursor textarea,
+    html.has-custom-cursor label {
+      cursor: none !important;
+    }
+    .cc-dot, .cc-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .cc-dot {
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #915eff, #f272c8);
+      transition: opacity .2s ease, transform .12s ease;
+    }
+    .cc-dot.is-clicking { transform: translate(-50%, -50%) scale(.55); }
+    .cc-ring {
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid rgba(145,94,255,.6);
+      background: rgba(145,94,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .2s ease, width .25s ease, height .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .cc-ring.is-visible, .cc-dot.is-visible { opacity: 1; }
+    .cc-ring.is-hovering {
+      width: 68px;
+      height: 68px;
+      background: linear-gradient(135deg, #915eff, #f272c8);
+      border-color: transparent;
+      box-shadow: 0 10px 26px rgba(145,94,255,.45);
+    }
+    .cc-ring .cc-arrow {
+      color: #fff;
+      font-size: 1rem;
+      opacity: 0;
+      transform: rotate(-45deg) scale(.6);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .cc-ring.is-hovering .cc-arrow {
+      opacity: 1;
+      transform: rotate(-45deg) scale(1);
+    }
+
+    /* Full-page glowing rainbow trail that follows the cursor, behind all content */
+    #cursor-trail-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 50;
+      mix-blend-mode: screen;
+    }
   </style>
 
 </head>
@@ -1946,6 +2015,154 @@
 
       if (visible[next]) visible[next].focus();
     });
+  })();
+  </script>
+
+  <!-- Global cursor-follow effect — active across the whole site, not just Projects -->
+  <script>
+  (function() {
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!canHover) return; // leave native cursor on touch/coarse-pointer devices
+
+    document.documentElement.classList.add('has-custom-cursor');
+
+    var dot = document.createElement('div');
+    dot.className = 'cc-dot';
+    var ring = document.createElement('div');
+    ring.className = 'cc-ring';
+    ring.innerHTML = '<i class="fa fa-arrow-right cc-arrow"></i>';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    var mouseX = 0, mouseY = 0;      // exact cursor position
+    var ringX = 0, ringY = 0;        // lagging ring position
+    var shown = false;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+      if (!shown) {
+        shown = true;
+        dot.classList.add('is-visible');
+        ring.classList.add('is-visible');
+      }
+    });
+
+    document.addEventListener('mouseleave', function() {
+      shown = false;
+      dot.classList.remove('is-visible');
+      ring.classList.remove('is-visible');
+    });
+
+    document.addEventListener('mousedown', function() { dot.classList.add('is-clicking'); });
+    document.addEventListener('mouseup', function() { dot.classList.remove('is-clicking'); });
+
+    // Smoothed ring follow (magnetic lag)
+    function tick() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // Grow + reveal arrow whenever hovering any interactive element, in any section
+    var hoverSelector = [
+      'a', 'button', 'input', 'textarea', 'label',
+      '.cert-card', '.service-icon', '.exp-card', '.exp-icon',
+      '.hero-soc-btn', '.about-btn', '.hero-btn-fill', '.hero-btn-ghost',
+      '#social1 .social-buttons a', '#social2 .social-buttons a', '#social .social-buttons a',
+      '#projects .portfolio-item .col', '#portfolio-flters li',
+      '.scroll-to-top'
+    ].join(', ');
+
+    document.addEventListener('mouseover', function(e) {
+      if (e.target.closest(hoverSelector)) ring.classList.add('is-hovering');
+    });
+    document.addEventListener('mouseout', function(e) {
+      if (e.target.closest(hoverSelector) && !(e.relatedTarget && e.relatedTarget.closest(hoverSelector))) {
+        ring.classList.remove('is-hovering');
+      }
+    });
+  })();
+  </script>
+
+  <!-- Full-page glowing rainbow trail that follows the cursor across every section -->
+  <script>
+  (function() {
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!canHover) return; // skip on touch devices
+
+    var canvas = document.createElement('canvas');
+    canvas.id = 'cursor-trail-canvas';
+    document.body.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var points = [];   // {x, y, hue, life}
+    var hue = 260;      // starting hue (purple), cycles through the spectrum as you move
+    var lastX = null, lastY = null;
+
+    document.addEventListener('mousemove', function(e) {
+      hue = (hue + 2.2) % 360;
+      var x = e.clientX, y = e.clientY;
+
+      // interpolate between last point and this one so fast movement still draws a continuous streak
+      if (lastX !== null) {
+        var dx = x - lastX, dy = y - lastY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var steps = Math.min(Math.ceil(dist / 6), 12);
+        for (var i = 1; i <= steps; i++) {
+          points.push({
+            x: lastX + (dx * i / steps),
+            y: lastY + (dy * i / steps),
+            hue: hue,
+            life: 1
+          });
+        }
+      } else {
+        points.push({ x: x, y: y, hue: hue, life: 1 });
+      }
+      lastX = x; lastY = y;
+      if (points.length > 140) points.splice(0, points.length - 140);
+    });
+
+    document.addEventListener('mouseleave', function() { lastX = null; lastY = null; });
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for (var i = 0; i < points.length; i++) {
+        var p = points[i];
+        p.life -= 0.018;
+        if (p.life <= 0) continue;
+
+        var radius = 46 * p.life + 8;
+        var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+        grad.addColorStop(0, 'hsla(' + p.hue + ', 95%, 65%, ' + (0.32 * p.life) + ')');
+        grad.addColorStop(0.5, 'hsla(' + p.hue + ', 95%, 55%, ' + (0.14 * p.life) + ')');
+        grad.addColorStop(1, 'hsla(' + p.hue + ', 95%, 55%, 0)');
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      points = points.filter(function(p) { return p.life > 0; });
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
   })();
   </script>
 
