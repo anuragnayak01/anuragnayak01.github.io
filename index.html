@@ -434,6 +434,43 @@
       -webkit-transform: rotateY(0deg) !important;
       transform: rotateY(0deg) !important;
     }
+
+    /* ===== AESTHETIC BACKGROUND — glow mesh + subtle grid per section ===== */
+    #about, #skills, #projects, #timeline, #certificates, #contact, header.masthead {
+      isolation: isolate;
+    }
+    #about::before, #skills::before, #projects::before, #timeline::before,
+    #certificates::before, #contact::before, header.masthead::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(650px circle at 12% 15%, rgba(145,94,255,0.18), transparent 60%),
+        radial-gradient(550px circle at 88% 20%, rgba(242,114,200,0.14), transparent 60%),
+        radial-gradient(500px circle at 30% 95%, rgba(94,145,255,0.11), transparent 60%),
+        radial-gradient(450px circle at 90% 90%, rgba(145,94,255,0.10), transparent 60%);
+    }
+    #about::after, #skills::after, #projects::after, #timeline::after,
+    #certificates::after, #contact::after, header.masthead::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .4;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+    }
+    /* subtle top-to-bottom seam blend between sections */
+    #about, #skills, #projects, #timeline, #certificates, #contact {
+      background-image: linear-gradient(180deg, rgba(145,94,255,0.05), transparent 12%, transparent 88%, rgba(242,114,200,0.04)) !important;
+    }
   </style>
 
 </head>
