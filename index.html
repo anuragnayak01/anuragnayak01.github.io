@@ -471,6 +471,19 @@
     #about, #skills, #projects, #timeline, #certificates, #contact {
       background-image: linear-gradient(180deg, rgba(145,94,255,0.05), transparent 12%, transparent 88%, rgba(242,114,200,0.04)) !important;
     }
+
+    /* ===== NEW PROJECT CARDS WITHOUT IMAGES — gradient front ===== */
+    .project-front-gradient {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .project-container .front { position: relative; }
+    .project-container .front .inner { position: relative; z-index: 1; }
   </style>
 
 </head>
@@ -509,7 +522,7 @@
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="blank"><b><i class="fa fa-file-pdf-o"></i> Resume</b></a>
+            <a class="nav-link" href="https://drive.google.com/file/d/1hoh3kJgvrWCxMkDskvVLEwATV1pt18BK/view?usp=sharing" target="blank"><b><i class="fa fa-file-pdf-o"></i> Resume</b></a>
           </li>
         </ul>
       </div>
@@ -1087,6 +1100,286 @@
             </div>
           </div>
 
+
+          <!-- NEW: Soil MIR Spectroscopy — USSN v2 -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-data">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#1c2140,#2d1b4e);">
+                  <div class="project-front-gradient"><i class="fa fa-leaf" style="font-size:56pt;color:rgba(145,94,255,.55);"></i></div>
+                  <div class="inner">
+                    <p>Soil MIR Spectroscopy — USSN v2</p>
+                    <span>PyTorch | Mamba/SSM | Deep Learning</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/soil-mir-ussn" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Designed a three-branch deep learning architecture (USSN v2) to predict six soil properties from USDA KSSL mid-infrared spectra.</li>
+                        <li>Combined a Bidirectional SSM (Mamba) backbone, Physics-ALiBi attention, and NODE layers with an uncertainty-weighted multi-task loss.</li>
+                        <li>Added MC-Dropout + split conformal prediction for calibrated uncertainty and a zero-inflated gated head for carbonate estimation.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: VeritasAI -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#241a3a,#3a1c3f);">
+                  <div class="project-front-gradient"><i class="fa fa-shield" style="font-size:56pt;color:rgba(242,114,200,.55);"></i></div>
+                  <div class="inner">
+                    <p>VeritasAI — Fake News Detection</p>
+                    <span>FastAPI | TF-IDF | SQLite</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://veritasai-j3ip.onrender.com" target="blank" title="Live Demo">
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a production-grade FastAPI backend (25 files, ~3,200 lines) with a self-contained frontend, deployed live on Render.</li>
+                        <li>Solved a memory-constrained deployment by replacing PyTorch/sentence-transformer embeddings with a lightweight TF-IDF fallback.</li>
+                        <li>Resolved a SQLite race condition between concurrent gunicorn workers for reliable multi-worker serving.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: Real-Time Support Triage (InsightPulse) -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#1a2438,#1c2140);">
+                  <div class="project-front-gradient"><i class="fa fa-comments" style="font-size:56pt;color:rgba(94,145,255,.55);"></i></div>
+                  <div class="inner">
+                    <p>Real-Time Support Triage (InsightPulse)</p>
+                    <span>LangGraph | CrewAI | ChromaDB | Groq</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/Real-time-Support-triage" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                      <a href="https://insightpulse-2vvm.onrender.com" target="blank" title="Live Demo">
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a multi-layer AI pipeline for real-time support ticket triage using LangGraph + CrewAI agents with FastAPI and ChromaDB retrieval.</li>
+                        <li>Integrated Groq's LLaMA-3.3-70B for low-latency inference and deployed the full stack live on Render.</li>
+                        <li>Resolved Python 3.14 compatibility issues, Poetry/path conflicts, and API key configuration for a stable deployment.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: Age-Invariant Face Verification (GAF-Net) -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-cv">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#2a1a3a,#1c2140);">
+                  <div class="project-front-gradient"><i class="fa fa-user-circle" style="font-size:56pt;color:rgba(145,94,255,.55);"></i></div>
+                  <div class="inner">
+                    <p>Age-Invariant Face Verification (GAF-Net)</p>
+                    <span>dlib | ArcFace | FaceNet | SHAP</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/Face_verification_Framework" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Researched a bidirectional SAM age-transformation pipeline for face verification across MORPH-2, FG-NET, and AgeDB-30 datasets.</li>
+                        <li>Fused ArcFace, FaceNet, VGGFace, LPIPS, and SSIM similarity scores via logistic regression with a Neyman-Pearson 3-class decision rule.</li>
+                        <li>Ran reviewer-grade experiments including fusion-method comparisons, significance testing, SHAP importance, and domain adaptation.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: Pan-Cancer Multi-Omics Survival Prediction -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-data">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#1c2140,#241a3a);">
+                  <div class="project-front-gradient"><i class="fa fa-dna" style="font-size:56pt;color:rgba(242,114,200,.55);"></i></div>
+                  <div class="inner">
+                    <p>Pan-Cancer Multi-Omics Survival Prediction</p>
+                    <span>TCGA | MOFA+ | Nash-MTL | SHAP</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/pan-cancer-multiomics-survival" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a multi-omics survival prediction pipeline on TCGA data, integrating modalities with MOFA+ factor analysis.</li>
+                        <li>Applied Nash-MTL multi-task optimization to balance competing cancer-subtype objectives during training.</li>
+                        <li>Used SHAP to interpret which multi-omics features drove survival predictions for each cancer type.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: PediTriage -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-ml filter-se">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#1a2438,#2a1a3a);">
+                  <div class="project-front-gradient"><i class="fa fa-heartbeat" style="font-size:56pt;color:rgba(94,145,255,.55);"></i></div>
+                  <div class="inner">
+                    <p>PediTriage — Bilingual Symptom Triage</p>
+                    <span>Streamlit | ChromaDB | RAG</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/pediatric-triage" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a bilingual (English/Arabic) pediatric symptom triage app with a RAG backend using ChromaDB and multilingual-e5-base embeddings.</li>
+                        <li>Layered deterministic safety overrides on top of an OpenRouter LLM to guard against unsafe triage recommendations.</li>
+                        <li>Iteratively fixed Streamlit UI issues including invisible inputs and HTML widget incompatibilities.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: The Pitch Visualizer -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-se">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#241a3a,#1c2140);">
+                  <div class="project-front-gradient"><i class="fa fa-picture-o" style="font-size:56pt;color:rgba(145,94,255,.55);"></i></div>
+                  <div class="inner">
+                    <p>The Pitch Visualizer</p>
+                    <span>FastAPI | Pollinations.ai | Render</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/The-Pitch-Visualizer" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a FastAPI storyboard generator that turns a written pitch into a sequence of illustrative visuals.</li>
+                        <li>Swapped in Pollinations.ai for image generation to remove dependency on paid APIs, then deployed the app on Render.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: VaultAI -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-se">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#1c2140,#1a2438);">
+                  <div class="project-front-gradient"><i class="fa fa-lock" style="font-size:56pt;color:rgba(94,145,255,.55);"></i></div>
+                  <div class="inner">
+                    <p>VaultAI — Project Knowledge Vault</p>
+                    <span>JavaScript | Full-Stack</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/Vaultai" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a personal knowledge-vault platform for organizing project documentation, design docs, and research notes across multiple ML projects.</li>
+                        <li>Used as the backing store for design documents and technical specs (e.g. the USSN v2 architecture doc) referenced by project ID across other repos.</li>
+                        <li>Structured around per-project workspaces so notes, docs, and artifacts stay organized as work spans multiple concurrent projects.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: Sports Tracker -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-se filter-data">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="project-container">
+                <div class="front" style="background:linear-gradient(135deg,#1a2438,#241a3a);">
+                  <div class="project-front-gradient"><i class="fa fa-trophy" style="font-size:56pt;color:rgba(242,114,200,.55);"></i></div>
+                  <div class="inner">
+                    <p>Sports Tracker</p>
+                    <span>Python</span>
+                  </div>
+                </div>
+                <div class="back">
+                  <div class="inner">
+                    <div class="portfolio-links">
+                      <a href="https://github.com/anuragnayak01/sports-tracker" target="blank" title="Github">
+                        <i class="fa fa-github"></i>
+                      </a>
+                    </div>
+                    <div class="list">
+                      <ul class="mb-0">
+                        <li>Built a Python tool to fetch and track live sports scores, standings, and stats across matches.</li>
+                        <li>Structured around a clean data-fetching pipeline for keeping tabs on ongoing games and results.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div><!-- end .row -->
       </div><!-- end .portfolio-container -->
