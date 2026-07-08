@@ -114,18 +114,20 @@
     .cert-card {
       flex: 0 0 280px;
       scroll-snap-align: start;
-      background: #fff;
+      background: #12162b;
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       text-decoration: none;
       display: block;
     }
 
     .cert-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 14px 32px rgba(145,94,255,0.28);
+      border-color: rgba(145,94,255,.55);
     }
 
     /* ── Image area ── */
@@ -135,20 +137,25 @@
       object-fit: cover;
       object-position: top;
       display: block;
-      background: #c8cdd3; /* shown when no src / broken img */
+      background: #1c2140; /* shown when no src / broken img */
+      transition: transform 0.35s ease;
+    }
+
+    .cert-card:hover .cert-card-img {
+      transform: scale(1.05);
     }
 
     /* Placeholder shimmer for empty slots */
     .cert-card-img-placeholder {
       width: 100%;
       height: 190px;
-      background: linear-gradient(90deg, #d0d4d9 25%, #e2e5e8 50%, #d0d4d9 75%);
+      background: linear-gradient(90deg, #1c2140 25%, #262c52 50%, #1c2140 75%);
       background-size: 200% 100%;
       animation: shimmer 1.6s infinite;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #9aa0a8;
+      color: #6d74a6;
       font-size: 2rem;
     }
 
@@ -166,7 +173,7 @@
       margin: 0 0 3px;
       font-size: 0.88rem;
       font-weight: 700;
-      color: #222;
+      color: #fff;
       font-family: 'Montserrat', sans-serif;
       white-space: nowrap;
       overflow: hidden;
@@ -175,7 +182,7 @@
 
     .cert-card-body .cert-meta {
       font-size: 0.76rem;
-      color: #888;
+      color: #9aa0c0;
       display: block;
       white-space: nowrap;
       overflow: hidden;
@@ -343,6 +350,55 @@
       .exp-timeline::before { left: 23px; }
       .exp-icon { flex: 0 0 48px; width: 48px; height: 48px; }
       .exp-card { padding: 14px 16px; }
+    }
+
+    /* ===== SKILLS — circular icon background + hover ===== */
+    #skills .service-icon {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(145,94,255,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    #skills .service-icon:hover {
+      transform: translateY(-6px);
+      background: rgba(145,94,255,.12);
+      border-color: rgba(145,94,255,.6);
+      box-shadow: 0 10px 24px rgba(145,94,255,.25);
+    }
+    #skills .service-icon i,
+    #skills .service-icon img {
+      transition: transform .25s ease;
+    }
+    #skills .service-icon:hover i,
+    #skills .service-icon:hover img {
+      transform: scale(1.08);
+    }
+
+    /* ===== ABOUT SECTION — social icon background + hover ===== */
+    #social1 .social-buttons a,
+    #social2 .social-buttons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(145,94,255,.3);
+      color: #fff;
+      margin: 0 6px;
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+    }
+    #social1 .social-buttons a:hover,
+    #social2 .social-buttons a:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(135deg, #915eff, #f272c8);
+      border-color: transparent;
     }
   </style>
 
