@@ -445,6 +445,17 @@
     #about, #skills, #projects, #timeline, #certificates, #contact, header.masthead {
       background: transparent !important;
     }
+    /* The original template paints its own dark hero overlay via a ::before/::after
+       pseudo-element on header.masthead (separate from the header's own background
+       property) — that's what was blocking the aurora and showing solid black.
+       Fully remove those pseudo-elements so the fixed aurora layer shows through. */
+    header.masthead::before,
+    header.masthead::after {
+      content: none !important;
+      background: transparent !important;
+      background-image: none !important;
+      display: none !important;
+    }
     body::before {
       content: "";
       position: fixed;
