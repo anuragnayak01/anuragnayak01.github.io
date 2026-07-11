@@ -48,7 +48,7 @@
   <style>
     /* ===== CERTIFICATES SECTION ===== */
     #certificates {
-        background: #050816; position: relative; overflow: hidden;
+        position: relative; overflow: hidden;
       padding-top: 4rem;
       padding-bottom: 4rem;
     }
@@ -297,7 +297,7 @@
       justify-content: center;
       overflow: hidden;
       z-index: 1;
-      box-shadow: 0 0 0 6px #050816;
+      box-shadow: 0 0 0 6px #07080f;
     }
     .exp-icon img {
       width: 100%;
@@ -435,41 +435,51 @@
       transform: rotateY(0deg) !important;
     }
 
-    /* ===== AESTHETIC BACKGROUND — glow mesh + subtle grid per section ===== */
+    /* ===== AESTHETIC BACKGROUND — one continuous fixed layer, no per-section seams ===== */
+    /* Near-black base + soft blurred aurora blobs, matching the jobseekerhub-theta reference. */
+    html, body {
+      background: #0a0a0f;
+    }
+    /* Sections no longer paint their own background — they stay transparent so the
+       single fixed layer below shows through with zero visible seam between sections. */
     #about, #skills, #projects, #timeline, #certificates, #contact, header.masthead {
-      isolation: isolate;
+      background: transparent !important;
     }
-    #about::before, #skills::before, #projects::before, #timeline::before,
-    #certificates::before, #contact::before, header.masthead::before {
+    body::before {
       content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
+      position: fixed;
+      inset: -10%;
+      z-index: -2;
       pointer-events: none;
-      background:
-        radial-gradient(650px circle at 12% 15%, rgba(145,94,255,0.18), transparent 60%),
-        radial-gradient(550px circle at 88% 20%, rgba(242,114,200,0.14), transparent 60%),
-        radial-gradient(500px circle at 30% 95%, rgba(94,145,255,0.11), transparent 60%),
-        radial-gradient(450px circle at 90% 90%, rgba(145,94,255,0.10), transparent 60%);
-    }
-    #about::after, #skills::after, #projects::after, #timeline::after,
-    #certificates::after, #contact::after, header.masthead::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: .4;
+      background: #0a0a0f;
       background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 44px 44px;
-      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+        radial-gradient(46% 38% at 15% 8%,  rgba(99,102,241,0.30), transparent 70%),
+        radial-gradient(40% 34% at 85% 14%, rgba(20,184,166,0.24), transparent 70%),
+        radial-gradient(42% 36% at 20% 60%, rgba(99,102,241,0.18), transparent 70%),
+        radial-gradient(44% 38% at 82% 55%, rgba(20,184,166,0.16), transparent 70%),
+        radial-gradient(46% 40% at 30% 96%, rgba(99,102,241,0.14), transparent 70%),
+        radial-gradient(42% 36% at 88% 92%, rgba(20,184,166,0.13), transparent 70%);
+      filter: blur(70px) saturate(115%);
+      animation: auroraDrift 26s ease-in-out infinite alternate;
     }
-    /* subtle top-to-bottom seam blend between sections */
-    #about, #skills, #projects, #timeline, #certificates, #contact {
-      background-image: linear-gradient(180deg, rgba(145,94,255,0.05), transparent 12%, transparent 88%, rgba(242,114,200,0.04)) !important;
+    @keyframes auroraDrift {
+      0%   { transform: translate3d(0, 0, 0) scale(1); }
+      50%  { transform: translate3d(-1.5%, 1.5%, 0) scale(1.04); }
+      100% { transform: translate3d(1.5%, -1%, 0) scale(1.02); }
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .3;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 46px 46px;
+      -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 40%, black 10%, transparent 85%);
+      mask-image: radial-gradient(ellipse 95% 95% at 50% 40%, black 10%, transparent 85%);
     }
 
     /* ===== FIX: long project titles were getting clipped at the top of ===== */
@@ -681,42 +691,59 @@
 
 <body id="page-top">
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger"
-        style="font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; display:none;" href="#page-top"><b>Anurag
-          Nayak</b></a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-        aria-label="Toggle navigation">
-        Menu
-        <i class="fa fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav text-uppercase ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#timeline">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#certificates">Certificates</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="blank"><b><i class="fa fa-file-pdf-o"></i> Resume</b></a>
-          </li>
-        </ul>
-      </div>
+  <style>
+    #topnav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:rgba(7,8,15,.72);backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.09);
+    }
+    #topnav .navrow{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px;}
+    #topnav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    #topnav .brand .brand-dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#14b8a6);box-shadow:0 0 14px rgba(99,102,241,.7);}
+    #topnav .brand span{font-family:'Montserrat',sans-serif;font-weight:800;color:#fff;font-size:1.02rem;letter-spacing:.2px;}
+    #topnav .navlinks{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;}
+    #topnav .navlinks a{
+      display:inline-block;padding:8px 16px;border-radius:999px;
+      color:#9aa0b8;text-decoration:none;font-size:.86rem;font-weight:600;
+      font-family:'Montserrat',sans-serif;transition:all .2s ease;
+    }
+    #topnav .navlinks a:hover{color:#fff;background:rgba(255,255,255,.06);}
+    #topnav .nav-cta{
+      display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);color:#fff;text-decoration:none;
+      font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.3px;
+      transition:all .2s ease;white-space:nowrap;
+    }
+    #topnav .nav-cta:hover{background:linear-gradient(135deg,#6366f1,#14b8a6);border-color:transparent;color:#fff;}
+    #topnav #navToggle{display:none;background:none;border:1px solid rgba(255,255,255,.09);color:#fff;border-radius:10px;padding:8px 12px;}
+    @media(max-width:900px){
+      #topnav .navlinks{display:none;}
+      #topnav #navToggle{display:inline-block;}
+      #topnav .navlinks.open{
+        display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;
+        background:#0a0b14;border-bottom:1px solid rgba(255,255,255,.09);padding:10px 24px 18px;gap:2px;
+      }
+      #topnav .navlinks.open a{padding:12px 8px;}
+    }
+  </style>
+  <nav id="topnav">
+    <div class="navrow">
+      <a class="brand" href="#page-top">
+        <span class="brand-dot"></span>
+        <span>Anurag Nayak</span>
+      </a>
+      <ul class="navlinks" id="navLinks">
+        <li><a class="js-scroll-trigger" href="#about">About</a></li>
+        <li><a class="js-scroll-trigger" href="#skills">Skills</a></li>
+        <li><a class="js-scroll-trigger" href="#projects">Projects</a></li>
+        <li><a class="js-scroll-trigger" href="#timeline">Experience</a></li>
+        <li><a class="js-scroll-trigger" href="#certificates">Certificates</a></li>
+        <li><a class="js-scroll-trigger" href="#contact">Contact</a></li>
+      </ul>
+      <a class="nav-cta" href="https://drive.google.com/file/d/14WCpWnSFUMaUQYa1IVfTyZDvuTZLQwi1/view?usp=sharing" target="_blank">
+        <i class="fa fa-file-pdf-o"></i> Resume
+      </a>
+      <button id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fa fa-bars"></i></button>
     </div>
   </nav>
 
@@ -833,7 +860,7 @@
     }
   </style>
 
-  <header class="masthead" style="background:#050816 !important;background-image:none !important;min-height:100vh;padding:0;position:relative;overflow:hidden;">
+  <header class="masthead" style="background-image:none !important;min-height:100vh;padding:0;position:relative;overflow:hidden;">
 
     <!-- Main row -->
     <div class="hero-inner" style="position:relative;z-index:1;width:100%;min-height:100vh;display:flex;align-items:center;">
@@ -885,7 +912,7 @@
   </header>
 
   <!-- Intro / About -->
-  <section class="content-section text-white" id="about" style="background:#050816;position:relative;overflow:hidden;padding-top:4rem;padding-bottom:6rem;">
+  <section class="content-section text-white" id="about" style="position:relative;overflow:hidden;padding-top:4rem;padding-bottom:6rem;">
     <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="row">
@@ -944,7 +971,7 @@
 
   <!-- Skills -->
   <!-- Skills -->
-  <section class="content-section text-white text-center" id="skills" style="background:#050816;position:relative;overflow:hidden;">
+  <section class="content-section text-white text-center" id="skills" style="position:relative;overflow:hidden;">
     <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="content-section-heading">
@@ -1066,7 +1093,7 @@
   </section>
 
   <!-- Projects Section -->
-  <section class="portfolio text-center" id="projects" style="background:#050816;position:relative;overflow:hidden;">
+  <section class="portfolio text-center" id="projects" style="position:relative;overflow:hidden;">
     <div class="container">
 
       <div class="content-section-heading">
@@ -1579,7 +1606,7 @@
   </section>
 
   <!-- Experience / Timeline Section -->
-  <section class="content-section text-white" id="timeline" style="background:#050816;position:relative;overflow:hidden;">
+  <section class="content-section text-white" id="timeline" style="position:relative;overflow:hidden;">
     <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="row">
@@ -1819,7 +1846,7 @@
 
 
   <!-- Contact Section -->
-  <section class="content-section text-white" id="contact" style="background:#050816;position:relative;overflow:hidden;padding-top:6rem;padding-bottom:6rem;">
+  <section class="content-section text-white" id="contact" style="position:relative;overflow:hidden;padding-top:6rem;padding-bottom:6rem;">
     <div style="position:relative;z-index:1;">
     <div class="container">
       <div class="row">
@@ -1923,6 +1950,24 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="js/three-effects.js"></script>
+
+  <!-- New nav: smooth-scroll links + close mobile menu on click -->
+  <script>
+  document.querySelectorAll('#topnav .js-scroll-trigger').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var targetId = this.getAttribute('href');
+      if(targetId && targetId.startsWith('#')){
+        var target = document.querySelector(targetId);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          var nl = document.getElementById('navLinks');
+          if(nl) nl.classList.remove('open');
+        }
+      }
+    });
+  });
+  </script>
 
   <!-- Touch-compatibility: simulate hover effects on tap for touchscreen devices -->
   <script>
